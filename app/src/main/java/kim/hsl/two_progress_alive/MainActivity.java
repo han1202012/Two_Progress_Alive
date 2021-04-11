@@ -1,6 +1,7 @@
 package kim.hsl.two_progress_alive;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,5 +18,10 @@ public class MainActivity extends AppCompatActivity {
         // 变成了前台 Service 服务
         startService(new Intent(this, LocalForegroundService.class));
         startService(new Intent(this, RemoteForegroundService.class));
+
+        // JobScheduler 拉活
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            KeepAliveJobService.startJob(this);
+        }
     }
 }
