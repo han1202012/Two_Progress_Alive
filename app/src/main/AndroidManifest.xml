@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="kim.hsl.two_progress_alive">
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Two_Progress_Alive">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 本地提权前台服务 Service -->
+        <service
+            android:name=".LocalForegroundService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <!-- 本地服务 , API 18 ~ 25 以上的设备, 关闭通知到专用服务 -->
+        <service
+            android:name=".LocalForegroundService$CancelNotificationService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <!-- 远程提权前台服务 Service -->
+        <service
+            android:name=".RemoteForegroundService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote"></service>
+
+        <!-- 远程服务 , API 18 ~ 25 以上的设备, 关闭通知到专用服务 -->
+        <service
+            android:name=".RemoteForegroundService$CancelNotificationService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote"></service>
+
+    </application>
+
+</manifest>
